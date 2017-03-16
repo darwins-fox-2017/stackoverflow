@@ -14,6 +14,11 @@ module.exports = {
       res.send(user)
     })
   },
+  findAnswerByQuestionId : (req,res)=>{
+    models.Answer.findById(req.params.id).then(function (user) {
+      res.send(user)
+    })
+  },
   deleteAnswer : (req,res)=>{
     models.Answer.destroy({
       where: {
@@ -25,10 +30,7 @@ module.exports = {
   },
   updateAnswer : (req,res)=>{
     models.Answer.update({
-      username: req.body.username,
-      password: hash.generate(req.body.password),
-      email: req.body.email,
-      admin: req.body.admin,
+      content:req.body.content,
       updateAt: new Date()
     }, {
       where: { id: req.params.id },
@@ -42,10 +44,9 @@ module.exports = {
   },
   createAnswer : (req,res)=>{
     models.Answer.create(
-      {username: req.body.username,
-        password: hash.generate(req.body.password),
-        email: req.body.email,
-        admin: req.body.admin
+      {content:req.body.content,
+        UserId: req.body.UserId,
+        QuestionId: req.body.QuestionId
       }).then(function (user) {
         res.send(user)
       })

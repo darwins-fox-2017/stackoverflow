@@ -28,7 +28,7 @@ module.exports = {
       username: req.body.username,
       password: hash.generate(req.body.password),
       email: req.body.email,
-      admin: req.body.admin,
+      fullname: req.body.fullname,
       updateAt: new Date()
     }, {
       where: { id: req.params.id },
@@ -45,7 +45,7 @@ module.exports = {
       {username: req.body.username,
         password: hash.generate(req.body.password),
         email: req.body.email,
-        admin: req.body.admin
+        fullname: req.body.fullname
       }).then(function (user) {
         res.send(user)
       })
@@ -55,7 +55,7 @@ module.exports = {
         username: req.body.username,
         password: hash.generate(req.body.password),
         email: req.body.email,
-        admin: false
+        fullname: req.body.fullname
       }).then(function(user){
         res.send(user)
       })
@@ -71,15 +71,26 @@ module.exports = {
           res.send('user not found')
         }
         if(hash.verify(req.body.password, user.password)){
-          var token = jwt.sign({username: user.username, isAdmin: user.admin}, process.env.SECRET, { expiresIn: '1d' });
+          var token = jwt.sign({username: user.username, isAdmin: user.fullname}, process.env.SECRET, { expiresIn: '1d' });
           res.json({
             success: true,
             message: 'Enjoy your token!',
             token: token
           });
         } else {
-          res.send("Wrong Password")
+          res.send("Check Your Credentials")
         }
 
-      })}
+      })},
+      verify : (req, res, next) => {
+        if (req.headers.token == 'null') {
+          res.json("you don't have access")
+        }else{
+          if (jwt.verify(req.headers.token, process.env.SECRET)) {
+            next()
+          }else {
+            res.json("token sudah expried")
+          }
+        }
+      }
     }

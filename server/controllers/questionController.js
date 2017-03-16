@@ -25,11 +25,8 @@ module.exports = {
   },
   updateQuestion : (req,res)=>{
     models.Question.update({
-      username: req.body.username,
-      password: hash.generate(req.body.password),
-      email: req.body.email,
-      admin: req.body.admin,
-      updateAt: new Date()
+      title: req.body.title,
+      content: req.body.content
     }, {
       where: { id: req.params.id },
       returning: true,
@@ -42,10 +39,9 @@ module.exports = {
   },
   createQuestion : (req,res)=>{
     models.Question.create(
-      {username: req.body.username,
-        password: hash.generate(req.body.password),
-        email: req.body.email,
-        admin: req.body.admin
+      {title: req.body.title,
+       content: req.body.content,
+        UserId: req.body.UserId
       }).then(function (user) {
         res.send(user)
       })
