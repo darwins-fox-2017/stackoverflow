@@ -5,8 +5,24 @@ require('dotenv').config()
 
 module.exports = {
   findAllUser : (req,res)=>{
-    models.User.findAll().then(function(users){
-      res.send(users);
+    models.User.findAll({
+      include: [
+        {
+          model: models.Question,
+          include: [
+            {
+              model: models.Answer,
+              include: [
+                {
+                  model:models.Vote
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }).then(users => {
+      res.send(users)
     })
   },
   findUserById : (req,res)=>{
@@ -26,7 +42,6 @@ module.exports = {
   updateUser : (req,res)=>{
     models.User.update({
       username: req.body.username,
-      password: hash.generate(req.body.password),
       email: req.body.email,
       fullname: req.body.fullname,
       updateAt: new Date()
@@ -36,7 +51,7 @@ module.exports = {
       plain: true
     })
     .then(function (result) {
-      console.log(result);
+      // console.log(result);
       res.send(result[1]);
     });
   },
@@ -71,7 +86,7 @@ module.exports = {
           res.send('user not found')
         }
         if(hash.verify(req.body.password, user.password)){
-          var token = jwt.sign({username: user.username, isAdmin: user.fullname}, process.env.SECRET, { expiresIn: '1d' });
+          var token = jwt.sign({username: user.username}, process.env.SECRET, { expiresIn: '1d' });
           res.json({
             success: true,
             message: 'Enjoy your token!',

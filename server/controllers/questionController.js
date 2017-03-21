@@ -1,12 +1,25 @@
-var jwt = require('jsonwebtoken')
-var hash = require('password-hash')
 var models = require('../models')
-require('dotenv').config()
 
 module.exports = {
   findAllQuestion : (req,res)=>{
-    models.Question.findAll().then(function(users){
-      res.send(users);
+    models.Question.findAll({
+      include: [
+        {
+          model: models.User,
+          include: [
+            {
+              model: models.Answer,
+              include: [
+                {
+                  model:models.Vote
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }).then(questions => {
+      res.send(questions)
     })
   },
   findQuestionById : (req,res)=>{

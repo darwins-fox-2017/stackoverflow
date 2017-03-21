@@ -5,8 +5,20 @@ require('dotenv').config()
 
 module.exports = {
   findAllAnswer : (req,res)=>{
-    models.Answer.findAll().then(function(users){
-      res.send(users);
+    models.Answer.findAll({
+      include: [
+        {
+          model: models.Question,
+          model: models.User,
+          include: [
+            {
+              model: models.Vote
+            }
+          ]
+        }
+      ]
+    }).then(answers => {
+      res.send(answers)
     })
   },
   findAnswerById : (req,res)=>{

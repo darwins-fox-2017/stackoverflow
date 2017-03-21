@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 //User Router
-router.get('/users', userController.findAllUser);
+router.get('/user', userController.findAllUser);
 
 router.get('/user/:id', userController.findUserById);
 
@@ -22,7 +22,7 @@ router.delete('/user/:id', userController.deleteUser);
 
 
 //Question router
-router.get('/questions', questionController.findAllQuestion);
+router.get('/question', questionController.findAllQuestion);
 
 router.get('/question/:id', questionController.findQuestionById);
 
@@ -33,7 +33,7 @@ router.put('/question/:id', questionController.updateQuestion);
 router.delete('/question/:id', questionController.deleteQuestion);
 
 //Answer Router
-router.get('/answers', answerController.findAllAnswer);
+router.get('/answer', answerController.findAllAnswer);
 
 router.get('/answer/:id', answerController.findAnswerById);
 
