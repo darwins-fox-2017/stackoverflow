@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
         Question.belongsTo(models.User, {foreignKey: 'user_id'})
+        Question.hasMany(models.Answer, {foreignKey: 'questionId'})
       }
     }
   });

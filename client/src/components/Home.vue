@@ -10,8 +10,24 @@
                     <el-button style="float: right;" type="primary">answer this question</el-button>
                 </div>
                 <div class="">
-                  {{ item.content }}
+                  Pertanyaan :
+                  <br>
+                  <br>
+                    {{ item.content }}
                 </div>
+                <br>
+                <el-collapse v-model="activeNames" @change="handleChange">
+                    <el-collapse-item title="Answers" name="1">
+                        <div>
+                            <el-card class="box-card" v-for="answer in item.Answers">
+                                    <h3>{{ answer.content }}</h3>
+                                    <br>
+                                    - by {{answer.User.name}}
+                            </el-card>
+
+                        </div>
+                    </el-collapse-item>
+                </el-collapse>
             </el-card>
         </el-col>
     </el-row>
@@ -25,31 +41,31 @@ let host = 'http://localhost:3000/api';
 export default {
     data() {
         return {
-          questions: []
+            questions: []
         }
     },
-    created(){
-      this.getData()
+    created() {
+        this.getData()
     },
     methods: {
-      getData(){
-        let self = this;
-        axios.get(host + '/home')
-            .then(response => {
-                // JSON responses are automatically parsed.
-                console.log('response:', response.data);
-                self.questions = response.data
-            })
-            .catch(e => {
-                console.log(e);
-            })
-      }
+        getData() {
+            let self = this;
+            axios.get(host + '/home')
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    console.log('response:', response.data);
+                    self.questions = response.data
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+        }
     }
 }
 </script>
 
 <style>
-.el-card{
-  margin-bottom: 30px;
+.el-card {
+    margin-bottom: 30px;
 }
 </style>
