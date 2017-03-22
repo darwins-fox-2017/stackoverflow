@@ -15,6 +15,7 @@ var usersAPI = require('./routes/apis/users');
 var questionsAPI = require('./routes/apis/questions');
 
 var app = express();
+app.use(cors())
 
 app.set('superSecret', creadentialConfig.secret); // secret variable
 
@@ -34,7 +35,6 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/api/users', usersAPI);
 app.use('/api/questions', questionsAPI);
-app.use(cors())
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
