@@ -13,6 +13,7 @@
 - title
 - content
 - user_id
+- slug
 
 #### Vote
 - user_id
