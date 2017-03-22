@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-let host = 'http://localhost:3000/api';
 
 export default {
     data() {
@@ -46,7 +44,7 @@ export default {
     methods: {
         getItems() {
             let self = this;
-            axios.get(host + '/questions')
+            this.axios.get('/questions')
                 .then(response => {
                     // JSON responses are automatically parsed.
                     console.log('response:', response.data);
@@ -62,7 +60,7 @@ export default {
         handleDelete(index, row) {
             this.questions.slice(index, 1)
             let self = this
-            axios.delete(host + '/questions/' + row.id).then(response => {
+            this.axios.delete('/questions/' + row.id).then(response => {
                 console.log(response);
                 if (response.status) {
                     self.getItems()

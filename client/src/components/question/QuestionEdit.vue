@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-let host = 'http://localhost:3000/api';
 export default {
     data() {
         return {
@@ -51,7 +49,7 @@ export default {
         },
         onSubmit() {
           let self = this
-          axios.put(host + '/questions/' + self.$route.params.id, self.form).then(x => {
+          this.axios.put('/questions/' + self.$route.params.id, self.form).then(x => {
             console.log(x);
               if(x.status){
                 self.$router.push('/questions')
@@ -63,7 +61,7 @@ export default {
         },
         getItem(){
           let self = this
-          axios.get(host + '/questions/' + self.$route.params.id).then(item => {
+          this.axios.get('/questions/' + self.$route.params.id).then(item => {
             self.form = item.data.data
           })
         }

@@ -30,9 +30,6 @@
 </div>
 </template>
 <script>
-import axios from 'axios';
-let host = 'http://localhost:3000/api';
-
 export default {
     data() {
         return {
@@ -50,14 +47,14 @@ export default {
     methods: {
         getItem() {
             let self = this
-            axios.get(host + '/questions/slug/' + self.$route.params.slug).then(question => {
+            this.axios.get('/questions/slug/' + self.$route.params.slug).then(question => {
                 self.question = question.data.data
                 self.newQuestion.questionId = question.data.data.id
             })
         },
         submitAnswer() {
             let self = this
-            axios.post(host + '/answers/', self.newQuestion).then(x => {
+            this.axios.post('/answers/', self.newQuestion).then(x => {
                 if (x.data.success) {
                     self.$message({
                         showClose: true,
