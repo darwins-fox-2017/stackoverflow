@@ -17,7 +17,7 @@
 #### Vote
 - user_id
 - question_id
-- count
+- type[1|-1]
 
 #### Answer
 - question_id
