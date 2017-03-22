@@ -4,14 +4,20 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+require('dotenv').config()
 var cors = require('cors')
+// JWT
+var jwt    = require('jsonwebtoken');
+
+let creadentialConfig = require('./config/credential-config.js')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var usersAPI = require('./routes/apis/users');
 
 var app = express();
+
+app.set('superSecret', creadentialConfig.secret); // secret variable
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
