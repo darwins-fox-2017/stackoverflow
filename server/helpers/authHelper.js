@@ -2,9 +2,24 @@ var jwt = require('jsonwebtoken');
 
 module.exports = {
     verify: function(req, res, next) {
-        jwt.verify(req.headers.authorization, process.env.JWT_SECRET, function(err, decoded) {
-            console.log(decoded) // bar
+        if (!req.headers.authorization) {
+            res.json({
+              success: false,
+              error: 'No credentials sent!'
+            });
+        }
+
+        var token = req.headers.authorization.split(' ')[1];
+        jwt.verify(token, 'dikyarga', function(err, decoded) {
+          if (typeof decoded != undefined) {
+            console.log('decoded : ', decoded) // bar
             next()
+          } else {
+            res.json({
+              success: false,
+              msg: 'wrong token'
+            })
+          }
         });
     }
 }
