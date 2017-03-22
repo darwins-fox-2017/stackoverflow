@@ -16,6 +16,9 @@ module.exports = {
               ]
             }
           ]
+        },
+        {
+          model: models.Answer
         }
       ]
     }).then(questions => {

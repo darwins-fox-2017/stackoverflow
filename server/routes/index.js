@@ -11,4 +11,6 @@ router.post('/signin', controller.signIn)
 
 router.post('/register', controller.signUp)
 
+router.post('/verify', controller.verifyToken)
+
 module.exports = router;

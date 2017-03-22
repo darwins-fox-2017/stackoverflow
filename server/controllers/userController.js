@@ -90,7 +90,9 @@ module.exports = {
           res.json({
             success: true,
             message: 'Enjoy your token!',
-            token: token
+            token: token,
+            userid: user.id,
+            username: user.username
           });
         } else {
           res.send("Check Your Credentials")
@@ -107,5 +109,16 @@ module.exports = {
             res.json("token sudah expried")
           }
         }
+      },
+      verifyToken : (req, res) => {
+        if (req.body.token == 'null') {
+          res.send("nothing")
+        }else{
+          if (jwt.verify(req.body.token, process.env.SECRET)) {
+            res.send("auth")
+          }else {
+            res.send("expired")
+          }
       }
     }
+  }
