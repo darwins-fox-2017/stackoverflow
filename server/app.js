@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 require('dotenv').config()
 var cors = require('cors')
-// JWT
-var jwt    = require('jsonwebtoken');
 
 let creadentialConfig = require('./config/credential-config.js')
 
