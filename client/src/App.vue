@@ -11,6 +11,8 @@
           </el-submenu>
       <el-menu-item index="3"><router-link to="/answers">Answers</router-link></el-menu-item>
       <el-menu-item index="3"><router-link to="/users">Users</router-link></el-menu-item>
+      <el-menu-item index="3" style="float: right;"><router-link to="/login">Login</router-link></el-menu-item>
+      <el-menu-item index="3" style="float: right;"><router-link to="/register">Register</router-link></el-menu-item>
     </el-menu>
 <br/>
 <br/>
