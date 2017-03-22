@@ -23,9 +23,7 @@
 </template>
 
 <script>
-import axios from 'axios';
 import slug from 'slug'
-let host = 'http://localhost:3000/api';
 export default {
     data() {
         return {
@@ -42,7 +40,7 @@ export default {
         },
         onSubmit() {
             let self = this
-            axios.post(host + '/answers/', self.form).then(x => {
+            this.axios.post('/answers/', self.form).then(x => {
                 if (x.status) {
                     self.$router.push('/answers')
                 } else {
