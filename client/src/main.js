@@ -5,12 +5,18 @@ import 'element-ui/lib/theme-default/index.css'
 import VueLocalStorage from 'vue-localstorage'
 import App from './App.vue'
 const VueGoogleMaps = require('vue2-google-maps');
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import { routes } from './routes'
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
 Vue.use(VueLocalStorage)
+Vue.use(VueAxios, axios)
+
+Vue.axios.defaults.baseURL = 'http://localhost:3000/api/';
+Vue.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 
 Vue.use(VueGoogleMaps, {
   load: {

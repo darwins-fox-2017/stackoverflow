@@ -43,6 +43,7 @@ export default {
           axios.post(host + '/users/login/', self.form).then(x => {
             console.log('hasil : ', x.data);
               if (x.data.success) {
+                localStorage.setItem('token', x.data.token)
                   self.$router.push('/')
               } else {
                   console.log('something wrong');

@@ -33,8 +33,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-let host = 'http://localhost:3000/api';
+// import axios from 'axios';
+// axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+
+// let host = 'http://localhost:3000/api';
 
 export default {
     data() {
@@ -48,7 +50,7 @@ export default {
     methods: {
         getData() {
             let self = this;
-            axios.get(host + '/home')
+            this.axios.get('/home')
                 .then(response => {
                     // JSON responses are automatically parsed.
                     console.log('response:', response.data);
