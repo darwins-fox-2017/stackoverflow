@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 require('dotenv').config()
 var cors = require('cors')
 
+let authHelper = require('./helpers/authHelper')
+
 let creadentialConfig = require('./config/credential-config.js')
 
 var index = require('./routes/index');
@@ -36,9 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/api/users', usersAPI);
-app.use('/api/questions', questionsAPI);
-app.use('/api/answers', answersAPI);
-app.use('/api/home', homeAPI);
+app.use('/api/questions', authHelper.verify, questionsAPI);
+app.use('/api/answers', authHelper.verify, answersAPI);
+app.use('/api/home', authHelper.verify, homeAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
