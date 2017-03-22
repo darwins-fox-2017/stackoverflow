@@ -40,7 +40,7 @@
             </form>
           </div>
         </div>
-        <a href="/signup.html">Create account</a>
+        <router-link :to="{name:'Register'}"><button class="btn blue">Create account</button></router-link>
       </center>
 
       <div class="section"></div>
@@ -65,10 +65,14 @@ export default {
         username:this.username,
         password:this.password
       }).then(res=>{
-        if(res.data == "Check Your Credentials"){
-          alert("Check Your Credentials")
+        console.log(res.data);
+        if(res.data.token){
+          localStorage.setItem("userid",res.data.userid)
+          localStorage.setItem("username",res.data.username)
+          localStorage.setItem("token", res.data.token)
+          window.location.href = "http://localhost:8080/#/"
         }else{
-          window.location.href = "/home"
+          alert("Check Your Credentials")
         }
       }).catch(err=>{
         console.log(err);

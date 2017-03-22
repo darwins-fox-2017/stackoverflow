@@ -5,19 +5,25 @@ module.exports = {
   downVote : (req,res)=>{
     models.Vote.destroy({
       where: {
-        UserId: req.params.userid
+        UserId: req.body.UserId,
+        AnswerId: req.body.AnswerId
       }
     }).then(function(){
-      res.send(`vote has been deleted for id ${req.params.id}`)
+      res.send(`vote has been deleted for id ${req.body.UserId}`)
     })
-  }
+  },
   upVote : (req,res)=>{
-    models.Vote.create(
-      {vote: true,
-       UserId: req.body.userid,
-        AnswerId: req.body.answerid
-      }).then(function (vote) {
-        res.send(vote)
+    models.Vote.findOrCreate({
+      where: {
+        UserId: req.body.UserId,
+        AnswerId: req.body.AnswerId
+      },
+     defaults:{
+       vote: true,
+       UserId: req.body.UserId,
+       AnswerId: req.body.AnswerId
+     }}).then(function (vote, created) {
+          res.send('ok')
       })
     }
   }

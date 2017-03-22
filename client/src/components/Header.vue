@@ -4,7 +4,8 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo"><img style="width: 150px;" src="../assets/img/stuck.png" alt=""></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="sass.html">Home</a></li>
+          <li><router-link to="/">Home</router-link></li>
+          <li><a href="#" v-on:click="logout">Logout</a></li>
         </ul>
       </div>
     </nav>
@@ -13,10 +14,18 @@
 
 <script>
 export default {
-  name: 'hello',
+  name: 'header',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods:{
+    logout:function () {
+      localStorage.removeItem("userid")
+      localStorage.removeItem("username")
+      localStorage.removeItem("token")
+      window.location.href = "http://localhost:8080/#/login"
     }
   }
 }
@@ -39,6 +48,6 @@ display: inline-block;
 margin: 0 10px;
 }
 a {
-color: #42b983;
+color: #fff;
 }
 </style>

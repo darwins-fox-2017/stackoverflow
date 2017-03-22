@@ -3,7 +3,7 @@ var router = express.Router();
 var userController = require('../controllers/userController')
 var questionController = require('../controllers/questionController')
 var answerController = require('../controllers/answerController')
-
+var voteController = require('../controllers/voteController')
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -42,5 +42,10 @@ router.post('/answer', answerController.createAnswer);
 router.put('/answer/:id', answerController.updateAnswer);
 
 router.delete('/answer/:id', answerController.deleteAnswer);
+
+//VOte Router
+router.post('/upvote', voteController.upVote);
+
+router.post('/downvote', voteController.downVote);
 
 module.exports = router;

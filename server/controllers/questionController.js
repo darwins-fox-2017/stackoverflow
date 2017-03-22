@@ -26,7 +26,26 @@ module.exports = {
     })
   },
   findQuestionById : (req,res)=>{
-    models.Question.findById(req.params.id).then(function (user) {
+    models.Question.findById(req.params.id, {
+      include: [
+        {
+          model: models.Answer,
+          include: [
+            {
+              model: models.User
+            },
+            {
+              model: models.Vote,
+              include: [
+                {
+                  model:models.User
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }).then(function (user) {
       res.send(user)
     })
   },

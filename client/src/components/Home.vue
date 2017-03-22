@@ -33,9 +33,10 @@
         <div class="col s12" >
           <h4>{{data.title}}</h4>
           <p>{{data.content}}</p>
-          <button class="left waves-effect waves-light btn" type="button">View</button>
-          <p class="right blue-text">Posted by : {{data.User.username}}</p>
-          <p class="right green-text">{{data.Answers.length}} Answer</p>
+          <router-link :to="{name:'Question',params:{id: data.id}}"><button class="left waves-effect waves-light btn" type="button">View</button></router-link>
+          <button class="left waves-effect waves-light btn red" type="button" v-on:click="deleteQuestion(data.id)">Delete</button>
+          <p class="right blue-text chip">Posted by : {{data.User.username}}</p>
+          <p class="right green-text chip">{{data.Answers.length}} Answer</p>
         </div>
       </div>
     </div>
@@ -63,7 +64,7 @@ export default {
     }
   },
   mounted() {
-    // this.prevent(),
+    this.prevent(),
     this.getQuestions()
 
   },
@@ -73,10 +74,10 @@ export default {
       axios.post('http://localhost:3000/api/question', {
         title: self.title,
         content: self.question,
-        UserId: localStorage.getItem("id") || '3'
+        UserId: localStorage.getItem("userid")
       }).then(res => {
-        questions.push(res.data)
-        this.getQuestions()
+        self.getQuestions()
+        self.clearField()
       }).catch(err => {
         console.log(err);
       })
@@ -90,22 +91,35 @@ export default {
         .catch( (err) => {
           console.log(err);
         })
+    },
+    deleteQuestion(id){
+      axios.delete('http://localhost:3000/api/question/'+id)
+        .then( (res) => {
+          this.getQuestions()
+        })
+        .catch( (err) => {
+          console.log(err);
+        })
+    },
+    clearField(){
+      let self = this;
+      self.title = '';
+      self.question = '';
+    },
+    prevent(){
+      var tokens = localStorage.getItem("token")
+      axios.post('http://localhost:3000/verify',{
+        token: tokens
+      }).then(res => {
+        if(res.data == "auth"){
+        }
+        else if(res.data == "nothing" || "expired"){
+          window.location.href = "http://localhost:8080/#/login"
+        }
+      }).catch(err => {
+        console.log(err);
+      })
     }
-    // prevent(){
-    //   var tokens = localStorage.getItem("token")
-    //   axios.post('http://localhost:3000/verify',{
-    //     token: tokens
-    //   }).then(res => {
-    //     if(res.data == "nothing" || "expired"){
-    //       window.location.href = ""
-    //     }
-    //     else if(res.data == "auth"){
-    //       window.location.href = ""
-    //     }
-    //   }).catch(err => {
-    //     console.log(err);
-    //   })
-    // }
   }
 }
 </script>

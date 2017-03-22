@@ -111,10 +111,14 @@ module.exports = {
         }
       },
       verifyToken : (req, res) => {
-        if (req.body.token == 'null') {
+        console.log("ada disini");
+        console.log(req.body.token);
+        var decoded = jwt.decode(req.body.token);
+        console.log(decoded);
+        if (req.body.token == null) {
           res.send("nothing")
         }else{
-          if (jwt.verify(req.body.token, process.env.SECRET)) {
+          if (decoded.username) {
             res.send("auth")
           }else {
             res.send("expired")
