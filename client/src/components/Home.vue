@@ -7,16 +7,14 @@
             <el-card class="box-card" v-for="item in questions">
                 <div slot="header" class="clearfix">
                     <span style="line-height: 36px; font-size: 20px;">{{ item.title }}</span>
-                    <el-button style="float: right;" type="primary">answer this question</el-button>
+                    <el-button style="float: right; " type="primary">answer this question</el-button>
                 </div>
                 <div class="">
-                  Pertanyaan :
-                  <br>
-                  <br>
                     {{ item.content }}
                 </div>
                 <br>
                 <el-collapse v-model="activeNames" @change="handleChange">
+                  <el-button style="float: right; margin-right: 20px; margin-top:3px;" :plain="true" type="info">{{ item.Answers.length }} answers</el-button>
                     <el-collapse-item title="Answers" name="1">
                         <div>
                             <el-card class="box-card" v-for="answer in item.Answers">
