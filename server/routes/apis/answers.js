@@ -13,4 +13,6 @@ router.put('/:id', answerController.update)
 
 router.delete('/:id', answerController.destroy)
 
+router.post('/:id/upvote', answerController.upvote)
+
 module.exports = router;

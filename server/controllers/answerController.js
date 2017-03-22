@@ -69,5 +69,18 @@ module.exports = {
         msg: 'Answer deleted'
       })
     })
+  },
+  upvote: function(req, res, next){
+    console.log(req.body);
+    db.Vote.create({
+      type: req.body.type,
+      userId: req.body.userId,
+      answerId: req.params.id
+    }).then(() => {
+      res.json({
+        success: true,
+        msg: 'Voted!'
+      })
+    })
   }
 }
