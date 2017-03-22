@@ -7,7 +7,7 @@ var jwt = require('jsonwebtoken');
 
 module.exports = {
     index: function(req, res, next) {
-        db.User.find().then((users) => {
+        db.User.findAll().then((users) => {
             res.json(users)
         })
     },

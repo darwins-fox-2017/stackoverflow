@@ -1,6 +1,7 @@
 import Home from './components/Home.vue'
 import Shop from './components/Shop.vue'
 import Login from './components/auth/Login.vue'
+import Register from './components/auth/Register.vue'
 import User from './components/user/User.vue'
 
 import Item from './components/item/Item.vue'
@@ -23,6 +24,7 @@ import AnswerEdit from './components/answer/AnswerEdit.vue'
 
 export const routes = [
   { path: '/login', component: Login},
+  { path: '/register', component: Register},
   { path : '', component: Home, children: [
     {path: '/shop', component: Shop}
   ]},
