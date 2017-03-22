@@ -12,8 +12,6 @@ module.exports = {
         var token = req.headers.authorization.split(' ')[1];
         jwt.verify(token, 'dikyarga', function(err, decoded) {
           if (typeof decoded == 'object') {
-            console.log(typeof decoded);
-            console.log('undefined');
             console.log('decoded : ', decoded) // bar
             next()
           } else {

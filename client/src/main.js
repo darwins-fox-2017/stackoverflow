@@ -16,7 +16,7 @@ Vue.use(VueLocalStorage)
 Vue.use(VueAxios, axios)
 
 Vue.axios.defaults.baseURL = 'http://localhost:3000/api/';
-Vue.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+Vue.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 Vue.use(VueGoogleMaps, {
   load: {
