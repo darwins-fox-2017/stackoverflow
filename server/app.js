@@ -14,6 +14,7 @@ var users = require('./routes/users');
 var usersAPI = require('./routes/apis/users');
 var questionsAPI = require('./routes/apis/questions');
 var answersAPI = require('./routes/apis/answers');
+var homeAPI = require('./routes/apis/home');
 
 var app = express();
 app.use(cors())
@@ -37,6 +38,7 @@ app.use('/users', users);
 app.use('/api/users', usersAPI);
 app.use('/api/questions', questionsAPI);
 app.use('/api/answers', answersAPI);
+app.use('/api/home', homeAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
