@@ -33,11 +33,6 @@
 </template>
 
 <script>
-// import axios from 'axios';
-// axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-
-// let host = 'http://localhost:3000/api';
-
 export default {
     data() {
         return {
