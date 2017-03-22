@@ -14,6 +14,12 @@ import QuestionDetail from './components/question/QuestionDetail.vue'
 import QuestionNew from './components/question/QuestionNew.vue'
 import QuestionEdit from './components/question/QuestionEdit.vue'
 
+import Answer from './components/answer/Answer.vue'
+import AnswerAll from './components/answer/AnswerAll.vue'
+import AnswerDetail from './components/answer/AnswerDetail.vue'
+import AnswerNew from './components/answer/AnswerNew.vue'
+import AnswerEdit from './components/answer/AnswerEdit.vue'
+
 export const routes = [
   { path : '', component: Home, children: [
     {path: '/shop', component: Shop}
@@ -30,5 +36,11 @@ export const routes = [
     {path: 'new', component: QuestionNew},
     {path: ':id', component: QuestionDetail},
     {path: ':id/edit', component: QuestionEdit}
+  ]},
+  { path : '/answers', component:Answer, children: [
+    {path: '', component: AnswerAll},
+    {path: 'new', component: AnswerNew},
+    {path: ':id', component: AnswerDetail},
+    {path: ':id/edit', component: AnswerEdit}
   ]}
 ]
