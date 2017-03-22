@@ -13,11 +13,16 @@
                 <h3>Answers</h3>
                 <div>
                     <el-card class="box-card" v-for="answer in question.Answers">
-                        <h3>{{ answer.content }}</h3>
+                        <h4>{{ answer.content }}</h4>
                         <br> - by {{answer.User.name}}
                     </el-card>
 
                 </div>
+                <h3>Submit your opinion!</h3>
+
+                <el-input type="textarea" v-model="newQuestion.content" :rows="4"></el-input>
+                <el-button type="primary" style="float: right; margin: 20px 0px;" @click="submitAnswer">Submit my answer</el-button>
+
             </el-card>
         </el-col>
     </el-row>
@@ -31,7 +36,12 @@ let host = 'http://localhost:3000/api';
 export default {
     data() {
         return {
-            question: ''
+            question: {},
+            newQuestion: {
+                content: '',
+                questionId: '',
+                userId: 1
+            }
         }
     },
     created() {
@@ -41,8 +51,24 @@ export default {
         getItem() {
             let self = this
             axios.get(host + '/questions/slug/' + self.$route.params.slug).then(question => {
-                console.log('slug : ' + self.$route.params.slug, question);
                 self.question = question.data.data
+                self.newQuestion.questionId = question.data.data.id
+            })
+        },
+        submitAnswer() {
+            let self = this
+            axios.post(host + '/answers/', self.newQuestion).then(x => {
+                if (x.data.success) {
+                    self.$message({
+                        showClose: true,
+                        message: 'Your answer submited!'
+                    });
+                    self.getItem()
+                    self.newQuestion.content = ''
+
+                } else {
+                    console.log('something wrong');
+                }
             })
         }
     }

@@ -7,6 +7,7 @@ module.exports = {
     })
   },
   create: function(req, res, next){
+    console.log(req.body);
     db.Answer.create({
       content: req.body.content,
       userId: req.body.userId,
