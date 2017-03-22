@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        User.hasMany(models.Question)
+        User.hasMany(models.Question, {foreignKey: 'user_id'})
       }
     }
   });

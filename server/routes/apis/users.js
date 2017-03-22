@@ -13,7 +13,7 @@ router.get('/ping', function(req, res, next) {
 
 router.get('/', userController.index)
 
-router.post('/', userController.create)
+router.post('/register', userController.create)
 
 router.post('/login', userController.login)
 

@@ -23,6 +23,11 @@ module.exports = {
             email: req.body.email,
             salt: secret,
             password: hash
+        }).then(() => {
+          res.json({
+            success: true,
+            msg: 'new user registered.'
+          })
         })
     },
     login: function(req, res, next) {

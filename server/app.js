@@ -12,6 +12,7 @@ let creadentialConfig = require('./config/credential-config.js')
 var index = require('./routes/index');
 var users = require('./routes/users');
 var usersAPI = require('./routes/apis/users');
+var questionsAPI = require('./routes/apis/questions');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/api/users', usersAPI);
+app.use('/api/questions', questionsAPI);
 app.use(cors())
 
 // catch 404 and forward to error handler
