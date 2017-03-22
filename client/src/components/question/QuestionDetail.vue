@@ -1,27 +1,24 @@
 <template>
 <div class="">
-    <el-button type="primary" @click.native="backToShop">back to Shop</el-button>
-    <br/>
-    <br/>
     <el-row>
-        <el-col :span="12">
-            <div class="grid-content bg-purple"></div>
-            <h4>Detail house</h4>
-            <h3>{{ house.title }}</h3>
-            <p>
-                {{ house.description}}
-            </p>
-            <h3>{{ house.price }}</h3>
-        </el-col>
-        <el-col :span="12">
-            <h3>Address</h3>
-            <p>
-                {{ house.address}}
-            </p>
-            <h3>Maps</h3>
-            <gmap-map :center="center" :zoom="7" style="width: 500px; height: 300px">
-                <gmap-marker v-for="m in markers" :position="m.position" :clickable="true" :draggable="true" @click="center=m.position"></gmap-marker>
-            </gmap-map>
+        <el-col :span="20">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <span style="line-height: 36px; font-size: 20px;">{{ question.title }}</span>
+                </div>
+                <div class="">
+                    {{ question.content }}
+                </div>
+                <br>
+                <h3>Answers</h3>
+                <div>
+                    <el-card class="box-card" v-for="answer in question.Answers">
+                        <h3>{{ answer.content }}</h3>
+                        <br> - by {{answer.User.name}}
+                    </el-card>
+
+                </div>
+            </el-card>
         </el-col>
     </el-row>
 
@@ -34,35 +31,18 @@ let host = 'http://localhost:3000/api';
 export default {
     data() {
         return {
-            house: '',
-            center: {
-                lat: 0,
-                lng: 0
-            },
-            markers: [{
-                position: {
-                    lat: 0,
-                    lng: 0
-                }
-            }]
+            question: ''
         }
     },
     created() {
         this.getItem()
     },
     methods: {
-        backToShop() {
-            this.$router.push('/shop')
-        },
         getItem() {
             let self = this
-            axios.get(host + '/houses/' + self.$route.params.id).then(house => {
-                self.house = house.data
-                self.markers[0].position.lat = parseFloat(house.data.lat)
-                self.markers[0].position.lng = parseFloat(house.data.lng)
-                self.center.lat = parseFloat(house.data.lat)
-                self.center.lng = parseFloat(house.data.lng)
-
+            axios.get(host + '/questions/slug/' + self.$route.params.slug).then(question => {
+                console.log('slug : ' + self.$route.params.slug, question);
+                self.question = question.data.data
             })
         }
     }

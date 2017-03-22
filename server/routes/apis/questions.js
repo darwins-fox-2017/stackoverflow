@@ -9,6 +9,8 @@ router.post('/', questionController.create)
 
 router.get('/:id', questionController.show)
 
+router.get('/slug/:slug', questionController.slug)
+
 router.put('/:id', questionController.update)
 
 router.delete('/:id', questionController.destroy)

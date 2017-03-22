@@ -35,7 +35,9 @@ export const routes = [
     {path: '', component: QuestionAll},
     {path: 'new', component: QuestionNew},
     {path: ':id', component: QuestionDetail},
-    {path: ':id/edit', component: QuestionEdit}
+    {path: ':id/edit', component: QuestionEdit},
+    {path: '/question/:slug', component: QuestionDetail}
+
   ]},
   { path : '/answers', component:Answer, children: [
     {path: '', component: AnswerAll},

@@ -72,5 +72,23 @@ module.exports = {
         msg: 'Question deleted'
       })
     })
+  },
+  slug: function(req, res, next){
+    db.Question.findOne({
+      where: {
+        slug: req.params.slug
+      },
+      include: [{
+        model: db.Answer,
+        include: [{
+          model: db.User
+        }]
+      }]
+    }).then((question) => {
+      res.json({
+        success: true,
+        data: question
+      })
+    })
   }
 }

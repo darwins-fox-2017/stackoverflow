@@ -7,7 +7,7 @@
             <el-card class="box-card" v-for="item in questions">
                 <div slot="header" class="clearfix">
                     <span style="line-height: 36px; font-size: 20px;">{{ item.title }}</span>
-                    <el-button style="float: right; " type="primary">answer this question</el-button>
+                    <el-button style="float: right; " type="primary" @click.native="toDetailQuestion(item.slug)">answer this question</el-button>
                 </div>
                 <div class="">
                     {{ item.content }}
@@ -57,6 +57,9 @@ export default {
                 .catch(e => {
                     console.log(e);
                 })
+        },
+        toDetailQuestion(slug){
+          this.$router.push('/question/' + slug)
         }
     }
 }
