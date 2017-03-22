@@ -2,14 +2,13 @@
 <div id="app">
 
     <el-menu  :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">Stackoverflow Clone</el-menu-item>
+        <el-menu-item index="1" @click.native="toHome">Stackoverflow Clone</el-menu-item>
         <el-submenu index="2">
             <template slot="title">Questions
             </template>
             <el-menu-item index="2-1"><router-link to="/questions">Show All</router-link></el-menu-item>
             <el-menu-item index="2-2">Create</el-menu-item>
           </el-submenu>
-      <el-menu-item index="3">Orders</el-menu-item>
       <el-menu-item index="3"><router-link to="/answers">Answers</router-link></el-menu-item>
       <el-menu-item index="3"><router-link to="/users">Users</router-link></el-menu-item>
     </el-menu>
@@ -38,6 +37,9 @@ export default {
         }
     },
     methods: {
+        toHome(){
+          this.$router.push('/')
+        },
         startHacking() {
             this.$notify({
                 title: 'It Works',
